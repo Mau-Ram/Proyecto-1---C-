@@ -76,10 +76,9 @@ void CrearMovimiento(Movimiento*& cabeza){
     while (true){
         cout << "1.) Tipo de Movimiento\n\n" ;     // Ingresar tipo de movimiento
         cout << "Escriba el tipo de movimiento que desea realizar ('INGRESO' / 'GASTO' ). \n";
-        cout << "MOVIMIENTO:";
+        cout << "MOVIMIENTO: ";
         cin >> mov;
-        Mayuscula(mov);    // Convertimos el string en un texto completamente en mayúscula
-        cout << mov;
+        mov=Mayuscula(mov);    // Convertimos el string en un texto completamente en mayúscula
         if (mov == "INGRESO"){
             nuevo_movimiento -> tipo = INGRESO;
             break;
@@ -97,7 +96,7 @@ void CrearMovimiento(Movimiento*& cabeza){
     while (true){
         cout << "2.) Monto\n\n" ;     // Ingresar categoría
         cout << "Ingrese el monto de su 'INGRESO' / 'GASTO'. Solo se permiten valores positivos \n";
-        cout << "Monto:";
+        cout << "Monto: ";
         cin >> monto_temp;
         if (monto_temp>0){
             if (nuevo_movimiento -> tipo == INGRESO){
@@ -115,16 +114,17 @@ void CrearMovimiento(Movimiento*& cabeza){
     
     cout << "3.) Categoria\n\n" ;     // Ingresar categoría
     cout << "Ingrese la categoria en la que se encuentra su movimiento. \n";
-    cout << "Categoria:";
+    cout << "Categoria: ";
     cin >> categoria_temp;
-    Mayuscula(categoria_temp);    // Convertimos la categoria en mayúscula así nos aseguramos que siempre las categorías son maýusculas
+    categoria_temp= Mayuscula(categoria_temp);    // Convertimos la categoria en mayúscula así nos aseguramos que siempre las categorías son maýusculas
     nuevo_movimiento ->categoria = categoria_temp;
     cout << endl << endl;
 
 
     cout << "4.) Descripcion\n\n" ;     // Ingresar descripción
     cout << "Ingrese una descripcion para este retiro. \n";
-    cout << "Descripcion del movimiento:";
+    cout << "Descripcion del movimiento: ";
+    cin.ignore(); // Ignora el salto de línea que no permite que se complete el getline
     getline(cin,descripcion_temp);  // Utilizamos un getline para que se puedan ingresar un texto que permita ingresar espacios.
     nuevo_movimiento ->descripcion = descripcion_temp;
     cout << endl << endl;
