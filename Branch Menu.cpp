@@ -17,9 +17,9 @@ const int TAM_FECHA = 3; // Variable constante que le asigna un valor de 3 a el 
 
 // Cada movimiento financiero contiene lo siguiente:
 struct Movimiento{
-    int dia;
-    int mes;
-    int anio;
+    string diaString; //el dia, mes y año se recibiran como string, para validar formato de fecha
+    string mesString; //luego se convertiran a int para validar rangos y validez de la fecha
+    string anioString;
     string descripcion; 
     string categoria;   
     float monto;
@@ -47,11 +47,11 @@ void Imprimir_ListaEnlazada(Movimiento* cabeza){
     cout << "[ ";
     while(actual != nullptr){
         cout << "(";
-        cout << actual->dia ;
+        cout << actual->diaString ;
         cout << "/";
-        cout << actual->mes ;
+        cout << actual->mesString ;
         cout << "/";
-        cout << actual->anio ;
+        cout << actual->anioString ;
         cout << ")";
         cout << "\n";
         cout << actual->descripcion ;
@@ -152,55 +152,83 @@ void CrearMovimiento(Movimiento*& cabeza){
 
     //Estos 3 while true hacen las validaciones de las fechas
     while (true){
+        cout<<"-----------\n";
         cout << "Dia: ";
-        cin >> nuevo_movimiento->dia;
-        if (nuevo_movimiento->dia > 30){
-            cout<<"\n\n";
-            cout<<"El dia no puede ser mayor a 30\n\n";
-            
-        } else if (nuevo_movimiento ->dia <= 0){
-            cout<<"\n\n";
-            cout<<"El dia no puede ser 0, ni tampoco ser negativo\n\n";   
-        }else{
+        cin >> nuevo_movimiento->diaString;
+        cout<<"-----------";
+
+        if (nuevo_movimiento->diaString[0] == '-') { //se valida que el dia no sea negativo (se pregunta por el indice 0 porque es la primera posicion del string)
+        cout << "\n\nEl dia no puede ser negativo\n\n";
+        continue;
+        }
+
+        if (nuevo_movimiento->diaString.size() != 2) { //validacion que el dia sea de dos digitos
+            cout << "\n\nEl día tiene que ser en formato (DD)\n\n";
+            continue;
+        }
+
+        int diaInt = stoi(nuevo_movimiento->diaString); // stoi, convierte un string a int
+        if (diaInt < 1 || diaInt > 30) {
+            cout << "\n\nEl día debe estar entre 01 y 30\n\n"; //se valida que el dia no sea 0, ni sobrepase el 30
+        } else {
             break;
         }
     }
 
-
     while (true){
+        cout<<"\n";
+        cout<<"-----------\n";
+        cout<<"Dia: "<<nuevo_movimiento->diaString<<"\n";
         cout << "Mes: ";
-        cin >> nuevo_movimiento->mes;
+        cin >> nuevo_movimiento->mesString;
+        cout<<"-----------";
 
-        if (nuevo_movimiento->mes > 12){
-            cout<<"\n\n";
-            cout<<"El mes no puede ser mayor a 12\n\n";
-            
-        } else if (nuevo_movimiento->mes <= 0){
-            cout<<"\n\n";
-            cout<<"El mes no puede ser 0, ni tampoco ser negativo\n\n";
-            
-        }else{
+        if (nuevo_movimiento->mesString[0] == '-') { //se valida que el mes no sea negativo
+        cout << "\n\nEl mes no puede ser negativo\n\n";
+        continue;
+        }
+
+        if (nuevo_movimiento->mesString.size() != 2) { //validacion que el mes sea de dos digitos
+            cout << "\n\nEl mes tiene que ser en formato (MM)\n\n";
+            continue;
+        }
+
+        int mesInt = stoi(nuevo_movimiento->mesString); // stoi, convierte un string a int
+        if (mesInt < 1 || mesInt > 12) {
+            cout << "\n\nEl mes debe estar entre 01 y 12\n\n"; //se valida que el mes no sea 0, ni sobrepase el 30
+        } else {
             break;
         }
     }
 
     while (true){
+
+        cout<<"\n";
+        cout<<"-----------\n";
+        cout<<"Dia: "<<nuevo_movimiento->diaString<<"\n";
+        cout<<"Mes: "<<nuevo_movimiento->mesString<<"\n";
         cout << "Año: ";
-        cin >> nuevo_movimiento->anio;
+        cin >> nuevo_movimiento->anioString;
+        cout<<"-----------";
 
-        if (nuevo_movimiento->anio > 2025){
-            cout<<"\n\n";
-            cout<<"El año no puede ser mayor al año actual 2025\n\n";
-            
-        } else if (nuevo_movimiento ->anio <= 0){
-            cout<<"\n\n";
-            cout<<"El año no puede ser 0, ni tampoco ser negativo\n\n";
-            
+        if (nuevo_movimiento->anioString[0] == '-') { //se valida que el año no sea negativo
+        cout << "\n\nEl año no puede ser negativo\n\n";
+        continue;
+        }
 
-        }else{
+        if (nuevo_movimiento->anioString.size() != 4) { //validacion que el año sea de cuatro digitos
+            cout << "\n\nEl año tiene que ser en formato (AAAA)\n\n";
+            continue;
+        }
+
+        int anioInt = stoi(nuevo_movimiento->anioString); // stoi, convierte un string a int
+        if (anioInt <1 || anioInt > 2025) {
+            cout << "\n\nEl año debe estar entre 0001 y 2025\n\n"; //se valida que el año no sea 0 o negativo, ni sobrepase el año actual
+        } else {
             break;
         }
     }
+    
         
 
         
@@ -243,7 +271,7 @@ void consultarMovimiento(){
         switch (opcion){ //se declara un switch para los caminos del menu
         
             case 1:
-                cout<<"a";
+                Imprimir_ListaEnlazada(lista);
                 cout<<"\n\n";
                 break;
             
