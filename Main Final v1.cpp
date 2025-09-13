@@ -13,8 +13,6 @@ using namespace std;
 
 enum tipo_movimiento{INGRESO,GASTO};
 
-const int TAM_FECHA = 3; // Variable constante que le asigna un valor de 3 a el arreglo fecha
-
 // Cada movimiento financiero contiene lo siguiente:
 struct Movimiento{
     string diaString; //el dia, mes y año se recibiran como string, para validar formato de fecha
@@ -38,10 +36,10 @@ string Mayuscula(string texto){
 }
 
 // Función para imprimir lista enlazada
-void Imprimir_ListaEnlazada(Movimiento* cabeza){
+void imprimirTodosLosMovimientos(Movimiento* cabeza){
     
     if (cabeza == nullptr){
-        cout<<"No se encuentra ningun movimiento registrado";         // Observación si la lista está vacía podría agregar al txt esto.
+        cout<<"No hay ningun movimiento registrado en la base de datos ❗";         // Observación si la lista está vacía podría agregar al txt esto.
         cout<<"\n\n";
         return;
     }
@@ -83,6 +81,177 @@ void Imprimir_ListaEnlazada(Movimiento* cabeza){
     }
 }
 
+void imprimirSoloIngresos(Movimiento* cabeza){
+    
+    if (cabeza == nullptr){
+        cout<<"No hay ningun movimiento registrado en la base de datos ❗";  // Observación si la lista está vacía podría agregar al txt esto.
+        cout<<"\n\n";
+        return;
+    }
+    // Algunas variables
+    Movimiento* actual = cabeza;
+    int contador = 1;
+    bool encontrado = false;
+    // Impresiones
+
+    while(actual != nullptr){
+
+        if (actual->tipo == INGRESO){
+
+            encontrado = true;
+
+            cout << "\n---------------------------------------------------------------------------------------\n\n";
+            // Imprimir el # de movimiento que es
+            cout << "Moviemiento #" << contador << "\n\n";
+            
+            // Imprimir Fecha
+            cout << "Fecha: " << actual->diaString << "/" << actual->mesString << "/" << actual->anioString <<"\n\n";
+        
+            // Tipo de Movimiento
+            cout << "Tipo de Movimiento: ";
+            if (actual -> tipo == INGRESO){
+                cout << "Ingreso\n\n";
+            }else if (actual -> tipo == GASTO){
+                cout << "Gasto\n\n";
+            }
+            // Monto
+            cout << "Monto: " << actual->monto ;
+            cout << "\n\n";
+            // Categoría
+            cout << "Categoría: "<< actual->categoria ;
+            cout << "\n\n";
+            // Descripción
+            cout << "Descripción: "<< actual->descripcion ;
+            cout << "\n\n";
+            // Fin
+            cout << "\n---------------------------------------------------------------------------------------\n\n";
+             
+        }
+        actual = actual->sgte;  // Avanzar en la lista
+        contador++;
+    }
+
+    if (encontrado == false){
+        cout<<"No se encuentra ningun ingreso registrado ❗"; 
+    }
+}
+
+void imprimirSoloGastos(Movimiento* cabeza){
+    
+    if (cabeza == nullptr){
+        cout<<"No hay ningun movimiento registrado en la base de datos ❗";  // Observación si la lista está vacía podría agregar al txt esto.
+        cout<<"\n\n";
+        return;
+    }
+    // Algunas variables
+    Movimiento* actual = cabeza;
+    int contador = 1;
+    bool encontrado = false;
+
+    // Impresiones
+
+    while(actual != nullptr){
+
+        if (actual->tipo == GASTO){
+
+            encontrado = true;
+
+            cout << "\n---------------------------------------------------------------------------------------\n\n";
+            // Imprimir el # de movimiento que es
+            cout << "Moviemiento #" << contador << "\n\n";
+            
+            // Imprimir Fecha
+            cout << "Fecha: " << actual->diaString << "/" << actual->mesString << "/" << actual->anioString <<"\n\n";
+        
+            // Tipo de Movimiento
+            cout << "Tipo de Movimiento: ";
+            if (actual -> tipo == INGRESO){
+                cout << "Ingreso\n\n";
+            }else if (actual -> tipo == GASTO){
+                cout << "Gasto\n\n";
+            }
+            // Monto
+            cout << "Monto: " << actual->monto ;
+            cout << "\n\n";
+            // Categoría
+            cout << "Categoría: "<< actual->categoria ;
+            cout << "\n\n";
+            // Descripción
+            cout << "Descripción: "<< actual->descripcion ;
+            cout << "\n\n";
+            // Fin
+            cout << "\n---------------------------------------------------------------------------------------\n\n";
+             
+        }
+        actual = actual->sgte;  // Avanzar en la lista
+        contador++;
+    }
+
+    if (encontrado == false){
+        cout<<"No se encuentra ningun gasto registrado ❗";  
+    }
+}
+
+void imprimirPorCategoria(Movimiento* cabeza){
+    
+    if (cabeza == nullptr){
+        cout<<"No hay ningun movimiento registrado en la base de datos ❗";  // Observación si la lista está vacía podría agregar al txt esto.
+        cout<<"\n\n";
+        return;
+    }
+    // Algunas variables
+    Movimiento* actual = cabeza;
+    int contador = 1;
+    string categoria;
+    bool encontrado = false;
+    // Impresiones
+
+    cout<<"Ingrese la categoría por la cual desea filtrar 🔠: ";
+    cin.ignore();
+    getline(cin, categoria);
+    categoria = Mayuscula(categoria);
+    
+    while(actual != nullptr){
+
+        if (actual->categoria == categoria){
+
+            encontrado = true;
+
+            cout << "\n---------------------------------------------------------------------------------------\n\n";
+            // Imprimir el # de movimiento que es
+            cout << "Moviemiento #" << contador << "\n\n";
+            
+            // Imprimir Fecha
+            cout << "Fecha: " << actual->diaString << "/" << actual->mesString << "/" << actual->anioString <<"\n\n";
+        
+            // Tipo de Movimiento
+            cout << "Tipo de Movimiento: ";
+            if (actual -> tipo == INGRESO){
+                cout << "Ingreso\n\n";
+            }else if (actual -> tipo == GASTO){
+                cout << "Gasto\n\n";
+            }
+            // Monto
+            cout << "Monto: " << actual->monto ;
+            cout << "\n\n";
+            // Categoría
+            cout << "Categoría: "<< actual->categoria ;
+            cout << "\n\n";
+            // Descripción
+            cout << "Descripción: "<< actual->descripcion ;
+            cout << "\n\n";
+            // Fin
+            cout << "\n---------------------------------------------------------------------------------------\n\n";
+            
+        }
+        actual = actual->sgte;  // Avanzar en la lista
+        contador++;
+    }
+
+    if (encontrado == false){
+        cout<<"No se encuentra ningun movimiento en esta categoría registrado ❗";  
+    }
+}
 
 // Función para crear un nuevo movimiento ya sea un ingreso o un gasto
 void CrearMovimiento(Movimiento*& cabeza){
@@ -91,12 +260,12 @@ void CrearMovimiento(Movimiento*& cabeza){
 
     // ALGUNAS VARIABLES
     string mov;
-    int monto_temp;
+    float monto_temp;
     string descripcion_temp;
     string categoria_temp;
 
    
-    cout << "\nREGISTRAR MOVIMIENTO\n" ;
+    cout << "\nREGISTRAR MOVIMIENTO 📝\n" ;
     cout<<"---------------------------------------------------------------------------------\n";   
 
     // Repetimos el ciclo hasta que se de una respuesta correcta
@@ -114,7 +283,7 @@ void CrearMovimiento(Movimiento*& cabeza){
             break;
         } else {
             cout <<"\n\n";
-            cerr << "ERROR. Solo se permite los movimientos (INGRESO / GASTO)";
+            cerr << "ERROR ⚠️. Solo se permite los movimientos (INGRESO / GASTO)";
             cout <<"\n\n";
         }
         
@@ -135,7 +304,7 @@ void CrearMovimiento(Movimiento*& cabeza){
                 break; 
             }
         } else {
-            cerr << "ERROR. Solo se permiten numeros positivos";
+            cerr << "ERROR ⚠️. Solo se permiten numeros positivos";
             cout <<"\n\n";
         }
     }
@@ -143,20 +312,34 @@ void CrearMovimiento(Movimiento*& cabeza){
     cout << "3.) Categoria\n\n" ;     // Ingresar categoría
     cout << "Ingrese la categoria en la que se encuentra su movimiento\n";
     cout << "Categoria: ";
-    cin >> categoria_temp;
+    cin.ignore();
+    getline(cin, categoria_temp);
     categoria_temp= Mayuscula(categoria_temp);    // Convertimos la categoria en mayúscula así nos aseguramos que siempre las categorías son maýusculas
     nuevo_movimiento ->categoria = categoria_temp;
     cout<<"\n\n";
 
 
     cout << "4.) Descripcion\n\n" ;     // Ingresar descripción
-    cout << "Ingrese una descripcion para este movimiento\n";
+    cout << "Ingrese una descripcion para este movimiento (toque ENTER si no desea ingresar descripción)\n";
     cout << "Descripcion del movimiento: ";
-    cin.ignore(); // Ignora el salto de línea que no permite que se complete el getline
     getline(cin,descripcion_temp);  // Utilizamos un getline para que se puedan ingresar un texto que permita ingresar espacios.
-    nuevo_movimiento ->descripcion = descripcion_temp;
-    cout<<"\n\n";
 
+    bool vacio = true; //se define la variable vacio en true
+
+    for (char c : descripcion_temp){ //se recorre cada char del string
+        if (c != ' ') {  // si alguno de los caracteres no está vacio 
+        vacio = false; //pasa la condicion a false, es decir, no está vacío
+        break;
+    }
+    }
+    
+    if (descripcion_temp.empty() || vacio == true){ //si se tocó solo enter o hay solo espacios
+        nuevo_movimiento->descripcion = "No hay descripcción para este movimiento";
+        cout<<"\n\n";
+    }else{
+        nuevo_movimiento ->descripcion = descripcion_temp;
+        cout<<"\n\n";
+    }
     
     cout << "5.) Fecha\n\n" ;     // Ingresar Fecha
     cout << "Ingrese la fecha de este movimiento (DD/MM/AAAA) \n";
@@ -167,7 +350,7 @@ void CrearMovimiento(Movimiento*& cabeza){
         cout<<"-----------\n";
         cout << "Dia: ";
         cin >> nuevo_movimiento->diaString;
-        cout<<"-----------";
+        cout<<"-----------\n";
 
         if (nuevo_movimiento->diaString[0] == '-') { //se valida que el dia no sea negativo (se pregunta por el indice 0 porque es la primera posicion del string)
         cout << "\n\nEl dia no puede ser negativo ❌ \n\n";
@@ -188,12 +371,11 @@ void CrearMovimiento(Movimiento*& cabeza){
     }
 
     while (true){
-        cout<<"\n";
         cout<<"-----------\n";
         cout<<"Dia: "<<nuevo_movimiento->diaString<<"\n";
         cout << "Mes: ";
         cin >> nuevo_movimiento->mesString;
-        cout<<"-----------";
+        cout<<"-----------\n";
 
         if (nuevo_movimiento->mesString[0] == '-') { //se valida que el mes no sea negativo
         cout << "\n\nEl mes no puede ser negativo ❌\n\n";
@@ -215,7 +397,6 @@ void CrearMovimiento(Movimiento*& cabeza){
 
     while (true){
 
-        cout<<"\n";
         cout<<"-----------\n";
         cout<<"Dia: "<<nuevo_movimiento->diaString<<"\n";
         cout<<"Mes: "<<nuevo_movimiento->mesString<<"\n";
@@ -241,10 +422,6 @@ void CrearMovimiento(Movimiento*& cabeza){
         }
     }
     
-        
-
-        
-
     cout <<"\n\n";
     cout<<"Movimiento registrado correctamente en la base de datos ✅";
     cout <<"\n\n";
@@ -267,13 +444,13 @@ void CrearMovimiento(Movimiento*& cabeza){
 void consultarMovimiento(){
     while(true){
         int opcion;
-        cout<<"Tipos de movimientos a mostrar\n";
+        cout<<"Tipos de movimientos a mostrar 🏧\n";
         cout<<"------------------------------------------\n";
-        cout<<"1.) Todos los movimientos\n";
-        cout<<"2.) Solo ingresos\n";
-        cout<<"3.) Solo gastos\n";
-        cout<<"4.) Filtrar por categoria especifica\n";
-        cout<<"5.) Devolverse al menu principal\n";
+        cout<<"1.) Todos los movimientos ✉️\n";
+        cout<<"2.) Solo ingresos 💰\n";
+        cout<<"3.) Solo gastos 💸\n";
+        cout<<"4.) Filtrar por categoria especifica 🔠\n";
+        cout<<"5.) Devolverse al menu principal 🔙\n";
         cout<<"------------------------------------------\n";
         cout<<"\n\n";
         cout<<"Ingrese una opcion: ";
@@ -283,22 +460,22 @@ void consultarMovimiento(){
         switch (opcion){ //se declara un switch para los caminos del menu
         
             case 1:
-                Imprimir_ListaEnlazada(lista);
+                imprimirTodosLosMovimientos(lista);
                 cout<<"\n\n";
                 break;
             
             case 2:
-                cout<<"b";
+                imprimirSoloIngresos(lista);
                 cout<<"\n\n";
                 break;
             
             case 3:
-                cout<<"c";
+                imprimirSoloGastos(lista);
                 cout<<"\n\n";
                 break;
                 
             case 4:
-                cout<<"d";
+                imprimirPorCategoria(lista);
                 cout<<"\n\n";
                 break;
 
@@ -309,7 +486,7 @@ void consultarMovimiento(){
 
 
             default: //si se ingresa otra opcion imprime este msj, y vuelve a preguntar
-                cout<<"Ingrese una opcion valida";
+                cout<<"Ingrese una opcion valida ";
                 cout<<"\n\n";
                 break;
         }
@@ -323,7 +500,7 @@ void menu (){
 
     while (true){ //se declara un while true para que el menú aparezca hasta que se salga de este
         int opcion;
-        cout<<"MENU PRINCIPAL\n";
+        cout<<"MENU PRINCIPAL 📍\n";
         cout<<"------------------------------------------\n";
         cout<<"1.) Registrar un nuevo movimiento 📝\n";
         cout<<"2.) Consultar movimientos existentes 🏧\n";
@@ -370,7 +547,7 @@ void menu (){
                 return;
 
             default: //si se ingresa otra opcion imprime este msj, y vuelve a preguntar
-                cout<<"Ingrese una opcion valida";
+                cout<<"Ingrese una opcion valida ❗";
                 cout<<"\n\n";
                 break;
         }
