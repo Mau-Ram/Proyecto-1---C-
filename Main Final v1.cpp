@@ -4,6 +4,7 @@
 
 //Profesor: Bryan Hernández
 
+<<<<<<< Updated upstream
 
 #include <iostream>
 #include <string>
@@ -14,6 +15,21 @@ using namespace std;
 enum tipo_movimiento{INGRESO,GASTO};
 
 // Cada movimiento financiero contiene lo siguiente:
+=======
+//INCLUSIONES
+//-------------------------------------------------------------------------------------------------------------------------------
+#include <iostream>
+#include <string>
+#include <windows.h> //se incuye windows.h para permitir entrada y salida de ñ, tildes y emojis
+using namespace std;
+//-------------------------------------------------------------------------------------------------------------------------------
+
+
+//ESTRUCTURA DE LOS NODOS
+//-------------------------------------------------------------------------------------------------------------------------------
+enum tipo_movimiento{INGRESO,GASTO}; //el tipo de movimiento se trabajara como un enum de solo 2 opciones
+
+>>>>>>> Stashed changes
 struct Movimiento{
     string diaString; //el dia, mes y año se recibiran como string, para validar formato de fecha
     string mesString; //luego se convertiran a int para validar rangos y validez de la fecha
@@ -26,16 +42,33 @@ struct Movimiento{
 };
 
 Movimiento* lista = nullptr; //se inicializa el puntero lista que apuntará a null (este será el puntero cabeza que se pasa por parametro a las funciones)
+<<<<<<< Updated upstream
 
 // función para convertir strings en mayúsculas
+=======
+//-------------------------------------------------------------------------------------------------------------------------------
+
+
+//FUNCION PARA TRABAJAR TODO EN UPPER
+//-------------------------------------------------------------------------------------------------------------------------------
+>>>>>>> Stashed changes
 string Mayuscula(string texto){
     for (int i=0; i < texto.length(); i++){
         texto[i] = toupper(texto[i]);   // Recorre cada letra del string y la convierte en mayúscula
     }
     return texto; //devuelve el texto todo en mayuscula
 }
+<<<<<<< Updated upstream
 
 // Función para imprimir lista enlazada
+=======
+//-------------------------------------------------------------------------------------------------------------------------------
+
+
+//LAS 4 FUNCIONES DE IMPRESION: TODOS, INGRESOS, GASTOS, CATEGORIA
+
+//-------------------------------------------------------------------------------------------------------------------------------
+>>>>>>> Stashed changes
 void imprimirTodosLosMovimientos(Movimiento* cabeza){
     
     if (cabeza == nullptr){
@@ -80,7 +113,13 @@ void imprimirTodosLosMovimientos(Movimiento* cabeza){
         contador++;
     }
 }
+<<<<<<< Updated upstream
 
+=======
+//-------------------------------------------------------------------------------------------------------------------------------
+
+//-------------------------------------------------------------------------------------------------------------------------------
+>>>>>>> Stashed changes
 void imprimirSoloIngresos(Movimiento* cabeza){
     
     if (cabeza == nullptr){
@@ -94,11 +133,19 @@ void imprimirSoloIngresos(Movimiento* cabeza){
     bool encontrado = false;
     // Impresiones
 
+<<<<<<< Updated upstream
     while(actual != nullptr){
 
         if (actual->tipo == INGRESO){
 
             encontrado = true;
+=======
+    while(actual != nullptr){ //se recorre toda la lista
+ 
+        if (actual->tipo == INGRESO){ //si hay por lo menos un movimiento de tipo INGRESO entra el if
+
+            encontrado = true; //y pasa la condición encontrado a true
+>>>>>>> Stashed changes
 
             cout << "\n---------------------------------------------------------------------------------------\n\n";
             // Imprimir el # de movimiento que es
@@ -131,11 +178,21 @@ void imprimirSoloIngresos(Movimiento* cabeza){
         contador++;
     }
 
+<<<<<<< Updated upstream
     if (encontrado == false){
         cout<<"No se encuentra ningun ingreso registrado ❗"; 
     }
 }
 
+=======
+    if (encontrado == false){ //si no encuentra ningun movimiento de tipo INGRESO entra a este if, el cual mostrará el msj
+        cout<<"No se encuentra ningun ingreso registrado ❗"; 
+    }
+}
+//-------------------------------------------------------------------------------------------------------------------------------
+
+//-------------------------------------------------------------------------------------------------------------------------------
+>>>>>>> Stashed changes
 void imprimirSoloGastos(Movimiento* cabeza){
     
     if (cabeza == nullptr){
@@ -191,7 +248,13 @@ void imprimirSoloGastos(Movimiento* cabeza){
         cout<<"No se encuentra ningun gasto registrado ❗";  
     }
 }
+<<<<<<< Updated upstream
 
+=======
+//-------------------------------------------------------------------------------------------------------------------------------
+
+//-------------------------------------------------------------------------------------------------------------------------------
+>>>>>>> Stashed changes
 void imprimirPorCategoria(Movimiento* cabeza){
     
     if (cabeza == nullptr){
@@ -252,8 +315,15 @@ void imprimirPorCategoria(Movimiento* cabeza){
         cout<<"No se encuentra ningun movimiento en esta categoría registrado ❗";  
     }
 }
+<<<<<<< Updated upstream
 
 // Función para crear un nuevo movimiento ya sea un ingreso o un gasto
+=======
+//-------------------------------------------------------------------------------------------------------------------------------
+
+//FUNCION CREAR MOVIMIENTO (CORAZON DEL PROGRAMA)
+//-------------------------------------------------------------------------------------------------------------------------------
+>>>>>>> Stashed changes
 void CrearMovimiento(Movimiento*& cabeza){
     Movimiento* nuevo_movimiento = new Movimiento();    // Creamos la lista vacia
     nuevo_movimiento -> sgte = nullptr;                 // Establecemos que este es el último valor de la lista
@@ -337,7 +407,11 @@ void CrearMovimiento(Movimiento*& cabeza){
         nuevo_movimiento->descripcion = "No hay descripcción para este movimiento";
         cout<<"\n\n";
     }else{
+<<<<<<< Updated upstream
         nuevo_movimiento ->descripcion = descripcion_temp;
+=======
+        nuevo_movimiento ->descripcion = descripcion_temp; //si si hay algo, se asigna lo que haya en descripcion temporal a la descripcion
+>>>>>>> Stashed changes
         cout<<"\n\n";
     }
     
@@ -353,18 +427,30 @@ void CrearMovimiento(Movimiento*& cabeza){
         cout<<"-----------\n";
 
         if (nuevo_movimiento->diaString[0] == '-') { //se valida que el dia no sea negativo (se pregunta por el indice 0 porque es la primera posicion del string)
+<<<<<<< Updated upstream
         cout << "\n\nEl dia no puede ser negativo ❌ \n\n";
+=======
+        cout << "\nEl dia no puede ser negativo ❌ \n\n";
+>>>>>>> Stashed changes
         continue;
         }
 
         if (nuevo_movimiento->diaString.size() != 2) { //validacion que el dia sea de dos digitos
+<<<<<<< Updated upstream
             cout << "\n\nEl día tiene que ser en formato (DD) ❗\n\n";
+=======
+            cout << "\nEl día tiene que ser en formato (DD) ❗\n\n";
+>>>>>>> Stashed changes
             continue;
         }
 
         int diaInt = stoi(nuevo_movimiento->diaString); // stoi, convierte un string a int
         if (diaInt < 1 || diaInt > 30) {
+<<<<<<< Updated upstream
             cout << "\n\nEl día debe estar entre 01 y 30 ❗\n\n"; //se valida que el dia no sea 0, ni sobrepase el 30
+=======
+            cout << "\nEl día debe estar entre 01 y 30 ❗\n\n"; //se valida que el dia no sea 0, ni sobrepase el 30
+>>>>>>> Stashed changes
         } else {
             break;
         }
@@ -378,18 +464,30 @@ void CrearMovimiento(Movimiento*& cabeza){
         cout<<"-----------\n";
 
         if (nuevo_movimiento->mesString[0] == '-') { //se valida que el mes no sea negativo
+<<<<<<< Updated upstream
         cout << "\n\nEl mes no puede ser negativo ❌\n\n";
+=======
+        cout << "\nEl mes no puede ser negativo ❌\n\n";
+>>>>>>> Stashed changes
         continue;
         }
 
         if (nuevo_movimiento->mesString.size() != 2) { //validacion que el mes sea de dos digitos
+<<<<<<< Updated upstream
             cout << "\n\nEl mes tiene que ser en formato (MM) ❗\n\n";
+=======
+            cout << "\nEl mes tiene que ser en formato (MM) ❗\n\n";
+>>>>>>> Stashed changes
             continue;
         }
 
         int mesInt = stoi(nuevo_movimiento->mesString); // stoi, convierte un string a int
         if (mesInt < 1 || mesInt > 12) {
+<<<<<<< Updated upstream
             cout << "\n\nEl mes debe estar entre 01 y 12 ❗\n\n"; //se valida que el mes no sea 0, ni sobrepase el 30
+=======
+            cout << "\nEl mes debe estar entre 01 y 12 ❗\n\n"; //se valida que el mes no sea 0, ni sobrepase el 30
+>>>>>>> Stashed changes
         } else {
             break;
         }
@@ -426,11 +524,20 @@ void CrearMovimiento(Movimiento*& cabeza){
     cout<<"Movimiento registrado correctamente en la base de datos ✅";
     cout <<"\n\n";
     
+<<<<<<< Updated upstream
     cout<<"---------------------------------------------------------------------------------\n";   
     // La lista esta vacia:
     if (cabeza ==  nullptr){
         cabeza = nuevo_movimiento;
     } else{                             // Lista no esta vacia
+=======
+    cout<<"---------------------------------------------------------------------------------\n"; 
+
+    // Si la lista está vacía, el nuevo movimiento va a ser la cabeza de la lista
+    if (cabeza ==  nullptr){
+        cabeza = nuevo_movimiento;
+    } else{                             //Si la lista no está vacía, se pondrá el nuevo movimiento al final
+>>>>>>> Stashed changes
         Movimiento* actual = cabeza;
         while(actual->sgte != nullptr){             // Mientras que el nodo no apunte a null continue el ciclo y modifique actual
             actual = actual ->sgte;
@@ -440,6 +547,14 @@ void CrearMovimiento(Movimiento*& cabeza){
     
     
 }
+<<<<<<< Updated upstream
+=======
+//-------------------------------------------------------------------------------------------------------------------------------
+
+
+//MENU INTERNO (CONSULTAR)
+//-------------------------------------------------------------------------------------------------------------------------------
+>>>>>>> Stashed changes
 
 void consultarMovimiento(){
     while(true){
@@ -492,7 +607,68 @@ void consultarMovimiento(){
         }
     }
 }
+<<<<<<< Updated upstream
 
+=======
+//-------------------------------------------------------------------------------------------------------------------------------
+
+//FUNCION ELIMINAR
+//-------------------------------------------------------------------------------------------------------------------------------
+bool eliminarMovimiento(Movimiento*& cabeza){
+
+    if (cabeza == nullptr) {
+        cout<<"La base de datos se encuentra vacía. No hay nada que eliminar ❗";
+        return false; // lista vacía, nada que eliminar
+    }
+
+    int numMov, contador = 1, total = 0;
+    imprimirTodosLosMovimientos(lista);
+
+    cout<<"Ingrese el numero de movimiento que desea borrar 🔢: ";
+    cin>>numMov;
+
+    Movimiento* tmp = cabeza; //se apunta el nodo temporal a la cabeza
+
+    while (tmp != nullptr) { //se recorre la lista hasta el ultimo nodo y se incrementa el valor de total
+        total++;             //para conocer la longitud de la lista (cantidad de nodos) (cantidad de movimientos)
+        tmp = tmp->sgte;
+    }
+
+    if (numMov < 1 || numMov > total) { //se valida que el movimiento que se desea eliminar esté en rango 
+        cout<<"\n\n";
+        cout << "ERROR ⚠️. El movimiento #" << numMov << " no existe (rango válido: 1 - " << total << ")\n";
+        return false;
+        
+}
+    // Caso especial: el nodo a eliminar es la cabeza
+    if (contador == numMov) {
+        Movimiento* aBorrar = cabeza;
+        cabeza = cabeza->sgte;   // mueve la cabeza al segundo nodo
+        delete aBorrar;                      // libera el nodo eliminado
+        return true;
+    }
+    
+
+    // Para eliminar un nodo intermedio o la cola
+    Movimiento* actual = cabeza;
+    Movimiento* anterior = nullptr;
+    
+    while (cabeza != nullptr && contador < numMov){
+        anterior = actual;
+        actual = actual->sgte;
+        contador++;
+    }
+
+    Movimiento* aBorrar = actual;
+    anterior->sgte = actual->sgte;
+    delete aBorrar;
+    return true; 
+}
+//-------------------------------------------------------------------------------------------------------------------------------
+
+//MENU PRINCIPAL
+//-------------------------------------------------------------------------------------------------------------------------------
+>>>>>>> Stashed changes
 void menu (){
     cout<<"\n\n";
     cout<<"BIENVENIDO A BANCO MAIS 🌽";
@@ -532,7 +708,14 @@ void menu (){
                 break;
                 
             case 4:
+<<<<<<< Updated upstream
                 cout<<"ELIMINAR MOVIMIENTO";
+=======
+                if(eliminarMovimiento(lista) == true){
+                    cout<<"\n\nSe ha eliminado correctamente el movimiento seleccionado ✅";
+                    cout<<"\n\nNOTA: Se reorganizaron los numeros de movimientos ⚠️";
+                }
+>>>>>>> Stashed changes
                 cout<<"\n\n";
                 break;
 
@@ -554,6 +737,7 @@ void menu (){
     }
 
 }
+<<<<<<< Updated upstream
 
 int main(){
 
@@ -561,3 +745,18 @@ int main(){
     menu();
     return 0;
 }
+=======
+//-------------------------------------------------------------------------------------------------------------------------------
+
+
+//MAIN (ORQUESTADOR)
+//-------------------------------------------------------------------------------------------------------------------------------
+int main(){
+
+    SetConsoleOutputCP(CP_UTF8); //para que se puedan moestrar ñ y tildes en la consola
+    SetConsoleCP(CP_UTF8); //para poder recibir ñ y tildes por cin
+    menu();
+    return 0;
+}
+//-------------------------------------------------------------------------------------------------------------------------------
+>>>>>>> Stashed changes
