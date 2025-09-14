@@ -82,7 +82,7 @@ void imprimirTodosLosMovimientos(Movimiento* cabeza){
         cout << "\n\n";
         // Descripción
         cout << "Descripción: "<< actual->descripcion ;
-        cout << "\n\n";
+        cout << "\n";
         // Fin
         cout << "\n---------------------------------------------------------------------------------------\n\n";
         
@@ -134,7 +134,7 @@ void imprimirSoloIngresos(Movimiento* cabeza){
             cout << "\n\n";
             // Descripción
             cout << "Descripción: "<< actual->descripcion ;
-            cout << "\n\n";
+            cout << "\n";
             // Fin
             cout << "\n---------------------------------------------------------------------------------------\n\n";
              
@@ -192,7 +192,7 @@ void imprimirSoloGastos(Movimiento* cabeza){
             cout << "\n\n";
             // Descripción
             cout << "Descripción: "<< actual->descripcion ;
-            cout << "\n\n";
+            cout << "\n";
             // Fin
             cout << "\n---------------------------------------------------------------------------------------\n\n";
              
@@ -255,7 +255,7 @@ void imprimirPorCategoria(Movimiento* cabeza){
             cout << "\n\n";
             // Descripción
             cout << "Descripción: "<< actual->descripcion ;
-            cout << "\n\n";
+            cout << "\n";
             // Fin
             cout << "\n---------------------------------------------------------------------------------------\n\n";
             
@@ -290,7 +290,7 @@ void CrearMovimiento(Movimiento*& cabeza){
     while (true){
         cout << "1.) Tipo de Movimiento\n\n" ;     // Ingresar tipo de movimiento
         cout << "Escriba el tipo de movimiento que desea realizar (INGRESO / GASTO)\n";
-        cout << "tipo: ";
+        cout << "Tipo: ";
         cin >> mov;
         mov=Mayuscula(mov);    // Convertimos el string en un texto completamente en mayúscula
         if (mov == "INGRESO"){
@@ -522,16 +522,29 @@ void consultarMovimiento(){
 //-------------------------------------------------------------------------------------------------------------------------------
 bool eliminarMovimiento(Movimiento*& cabeza){
 
+    int numMov, contador = 1, total = 0;
+    char confirmacion;
+
     if (cabeza == nullptr) {
         cout<<"La base de datos se encuentra vacía. No hay nada que eliminar ❗";
         return false; // lista vacía, nada que eliminar
     }
 
-    int numMov, contador = 1, total = 0;
     imprimirTodosLosMovimientos(lista);
 
     cout<<"Ingrese el numero de movimiento que desea borrar 🔢: ";
     cin>>numMov;
+
+
+    //se pregunta si el usuario está seguro de eliminar el movimiento que seleccionó 
+    cout<<"\n\n¿Está seguro que desea eliminar este movimiento?. (S = eliminar, Otra tecla = cancelar eliminación) ❗: ";
+    cin>>confirmacion;
+    confirmacion = toupper(confirmacion);
+
+    if (confirmacion != 'S'){
+        cout<<"Se ha cancelado la eliminación del movimiento seleccionado ✅";
+        return false;
+    }
 
     Movimiento* tmp = cabeza; //se apunta el nodo temporal a la cabeza
 
@@ -615,7 +628,7 @@ void menu (){
             case 4:
                 if(eliminarMovimiento(lista) == true){
                     cout<<"\n\nSe ha eliminado correctamente el movimiento seleccionado ✅";
-                    cout<<"\n\nNOTA: Se reorganizaron los numeros de movimientos ⚠️";
+                    cout<<"\n\n\nNOTA: Se reorganizaron los numeros de movimientos ⚠️";
                 }
                 cout<<"\n\n";
                 break;
